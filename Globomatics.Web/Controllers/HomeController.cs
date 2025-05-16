@@ -8,9 +8,18 @@ namespace Globomatics.Web.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly IRepository<Product> productRepository;
+
+    public HomeController(IRepository<Product> productRepository)
+    {
+        this.productRepository = productRepository;
+    }
+
     public IActionResult Index()
     {
-        return View();
+        var products = productRepository.All();
+
+        return View(products);
     }
 
     public IActionResult TicketDetails(Guid productId, string slug)
@@ -22,7 +31,6 @@ public class HomeController : Controller
     {
         return View();
     }
-
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
