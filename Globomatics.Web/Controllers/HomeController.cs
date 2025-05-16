@@ -8,16 +8,20 @@ namespace Globomatics.Web.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly ILogger<HomeController> logger;
     private readonly IRepository<Product> productRepository;
 
-    public HomeController(IRepository<Product> productRepository)
+    public HomeController(IRepository<Product> productRepository, ILogger<HomeController> logger)
     {
         this.productRepository = productRepository;
+        this.logger = logger;
     }
 
     public IActionResult Index()
     {
         var products = productRepository.All();
+
+        logger.LogInformation($"Loaded {products.Count()} products");
 
         return View(products);
     }
