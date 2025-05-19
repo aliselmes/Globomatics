@@ -26,7 +26,7 @@ public class HomeController : Controller
         return View(products);
     }
 
-    [Route("/details/{productId}/{slug}")]
+    [Route("/details/{productId:guid}/{slug:slugTransform}")]
     public IActionResult TicketDetails(Guid productId, string? slug)
     {
         var product = productRepository.Get(productId);
