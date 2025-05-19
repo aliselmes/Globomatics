@@ -26,9 +26,11 @@ public class HomeController : Controller
         return View(products);
     }
 
-    public IActionResult TicketDetails(Guid productId, string slug)
+    [Route("/details/{productId}/{slug}")]
+    public IActionResult TicketDetails(Guid productId, string? slug)
     {
-        throw new NotImplementedException();
+        var product = productRepository.Get(productId);
+        return View(product);
     }
 
     public IActionResult Privacy()
