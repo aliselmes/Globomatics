@@ -20,11 +20,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var products = productRepository.All();
-
-        logger.LogInformation($"Loaded {products.Count()} products");
-
-        return View(products);
+        return View();
     }
 
     [Route("/details/{productId:guid}/{slug:slugTransform}")]
